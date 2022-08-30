@@ -1,0 +1,40 @@
+sys
+sysname 路由器名
+
+配置命令
+<Huawei> system-view
+#进入系统视图
+[Huawei] user-interface console 0
+#进入控制台视图
+[Huawei -ui-console0] authentication-mode password
+#配置认证方式为密码认证
+[Huawei -ui-console0] set authentication password cipher Huawei@123
+#配置认证密码为Huawei@123
+[Huawei -ui-console0] return
+#返回用户视图
+< Huawei > save
+#保存配置文件
+
+
+如果想修改密码，可通过set authentication password cipher XXXXX设置（XXXXX代表你需要输入的修改后的密码）
+[R1]user-interface console 0 //先进入到console 0口进行配置
+[R1-ui-console0]set authentication password cipher admin1234 //修改密码为admin1234
+
+
+使用AAA认证模式，配置使用用户名和密码登录console口，以及管理权限级别
+[R1]user-interface console 0 //配置console 0口
+[R1-ui-console0]authentication-mode aaa //配置认证模式为aaa
+进入aaa模式下配置用户和权限
+[R1]aaa
+[R1-aaa]local-user user password cipher user123 //创建用户user，密码user123。如果需要修改密码，也可在此重新配置密码来修改。
+Info: Add a new user
+[R1-aaa]local-user user privilege level 15 //配置用户user的权限为level 15，此处用户等级有0-15共16级，可根据需要配置不同的用户使用不同的权限。
+使用电脑连接设备，输入用户名密码，登录到设备
+
+local-user a service-type terminal //设置协议服务类型 默认为 terminal终端
+
+display current-configuration
+查看当前设备所有配置
+
+display this 
+查看当前界面配置
