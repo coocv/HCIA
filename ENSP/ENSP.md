@@ -1862,6 +1862,8 @@ MAC地址
 #最大活动链路数（另一边可不设置）
 
 4.加入成员物理链路
+[R1-Eth-Trunk1]undo portswitch           
+#关闭二层端口变为三层端口，二层接口不能配地址
 [S1-Eth-Trunk1] trunkport GigabitEthernet 0/0/1 to 0/0/3 
 
 注：端口间默认不开启抢占，需手工开启抢占功能
@@ -1870,8 +1872,8 @@ MAC地址
 [S1-Eth-Trunk1]lacp preempt delay        
 #抢占延迟时间，默认30s
 
-[R1-Eth-Trunk1]undo portswitch           
-#关闭二层端口变为三层端口，二层接口不能配地址
+[S1-GigabitEthernet0/0/1]lacp priority 40000
+#在端口视图修改lacp优先级以实现备份功能
 ```
 
 ### 区别
